@@ -19,24 +19,24 @@ if (-not $remotoExiste) {
     git remote add origin $RemoteUrl
 }
 
+# Configurar safe.directory (para evitar problemas de permissão)
+git config --global --add safe.directory "C:/Users/Kin/Desktop/django"
+
 # Enviar para o GitHub
 git branch -M main
 git add .
-git commit -m "Atualização para deploy no Render" # Não se preocupe se aparecer 'nada para commitar'
+git commit -m "Site otimizado para AdSense e SEO" 
 git push -u origin main
 
-Write-Host "Projeto enviado para o GitHub com sucesso!"
+Write-Host "✅ Projeto enviado para o GitHub com sucesso!"
 Write-Host ""
-Write-Host "Agora acesse https://render.com/, crie um novo Web Service e conecte ao repositório:"
-Write-Host "    $RemoteUrl"
+Write-Host "🔧 Configurações para o Render:"
+Write-Host "  Build Command: pip install -r requirements.txt && python manage.py collectstatic --noinput"
+Write-Host "  Start Command: python manage.py migrate && gunicorn meusite.wsgi"
 Write-Host ""
-Write-Host "No Render, use estas configurações:"
-Write-Host "  Build command: pip install -r requirements.txt && python manage.py collectstatic --noinput"
-Write-Host "  Start command: gunicorn meusite.wsgi"
-Write-Host ""
-Write-Host "Adicione as variáveis de ambiente:"
+Write-Host "🔑 Variáveis de ambiente necessárias:"
 Write-Host "  DJANGO_SETTINGS_MODULE=meusite.settings"
-Write-Host "  SECRET_KEY=sua-chave-super-secreta"
+Write-Host "  SECRET_KEY=sua-chave-super-secreta-aqui"
 Write-Host "  DEBUG=False"
 Write-Host ""
-Write-Host "Seu site será publicado em um endereço como https://meusite-django.onrender.com"
+Write-Host "🌐 Seu site será publicado em: https://meusite-django.onrender.com"

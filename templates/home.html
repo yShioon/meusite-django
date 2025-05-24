@@ -2,29 +2,69 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Meu Site de Conteúdo</title>
-    <!-- Google Adsense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3625069878363794"
-        crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ meta_title|default:"Meu Site de Conteúdo" }}</title>
+    <meta name="description" content="{{ meta_description|default:'Conteúdo de qualidade para você' }}">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-SEU-CODIGO-ADENSE" crossorigin="anonymous"></script>
+    <style>
+        /* Estilos otimizados para leitura e anúncios */
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .ad-container { margin: 20px 0; padding: 15px; background: #f5f5f5; text-align: center; }
+        .post { margin-bottom: 40px; }
+        .post h2 a { color: #2c3e50; text-decoration: none; }
+        .post-meta { color: #7f8c8d; font-size: 0.9em; }
+    </style>
 </head>
 <body>
-    <h1>Últimas Postagens</h1>
-    {% for post in posts %}
-        <h2><a href="{% url 'detalhe_postagem' post.id %}">{{ post.titulo }}</a></h2>
-        <p>{{ post.criado_em|date:"d/m/Y H:i" }}</p>
-        <hr>
-    {% empty %}
-        <p>Nenhuma postagem ainda.</p>
-    {% endfor %}
+    <header>
+        <h1>Meu Site de Conteúdo</h1>
+        <nav>
+            <a href="/">Home</a>
+            {% for cat in categorias %}
+                <a href="{% url 'posts_por_categoria' cat.slug %}">{{ cat.nome }}</a>
+            {% endfor %}
+        </nav>
+    </header>
 
-    <!-- Bloco de anúncio Adsense -->
-    <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-3625069878363794"
-        data-ad-slot=""
-        data-ad-format="auto"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    <div class="ad-container">
+        <!-- AdSense Top -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-SEU-CODIGO-ADENSE"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <main>
+        {% for post in posts %}
+        <article class="post">
+            <h2><a href="{{ post.get_absolute_url }}">{{ post.titulo }}</a></h2>
+            <p class="post-meta">
+                {{ post.criado_em|date:"d/m/Y" }} | 
+                {% if post.categoria %}
+                <a href="{% url 'posts_por_categoria' post.categoria.slug %}">{{ post.categoria.nome }}</a>
+                {% endif %}
+            </p>
+            <p>{{ post.resumo }}</p>
+        </article>
+        {% endfor %}
+    </main>
+
+    <div class="ad-container">
+        <!-- AdSense Bottom -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-SEU-CODIGO-ADENSE"
+             data-ad-slot="0987654321"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <footer>
+        <p>&copy; {% now "Y" %} Meu Site. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
