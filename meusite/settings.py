@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-minha-chave-secreta-1234567890'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['meusite-django.onrender.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
