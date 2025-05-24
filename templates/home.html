@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Site de Conteúdo</title>
+    <!-- Google Adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3625069878363794"
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Últimas Postagens</h1>
+    {% for post in posts %}
+        <h2><a href="{% url 'detalhe_postagem' post.id %}">{{ post.titulo }}</a></h2>
+        <p>{{ post.criado_em|date:"d/m/Y H:i" }}</p>
+        <hr>
+    {% empty %}
+        <p>Nenhuma postagem ainda.</p>
+    {% endfor %}
+
+    <!-- Bloco de anúncio Adsense -->
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3625069878363794"
+        data-ad-slot=""
+        data-ad-format="auto"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
